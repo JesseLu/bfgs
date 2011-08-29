@@ -11,4 +11,4 @@ Next...
 -------
 
 1.  Redo backtracking to see if the complete (strong?) Wolfe conditions are satisfied.
-1.  Make BFGS work.
+1.  Make BFGS work!

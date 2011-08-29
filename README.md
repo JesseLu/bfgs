@@ -10,4 +10,5 @@ Todo
 Next...
 -------
 
-1.  Implement Newton's method and compare primal-dual and primal strategies for constrained optimization.
+1.  Redo backtracking to see if the complete (strong?) Wolfe conditions are satisfied.
+1.  Make BFGS work.

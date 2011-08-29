@@ -1,10 +1,18 @@
 function test_cases(n)
 
-newt.name = 'Newton method';
-newt.fun = @(x0, H, g, f) newton(x0, H, g, f);
+opt{1}.name = 'Newton';
+opt{1}.fun = @(x0, H, g, f) newton(x0, H, g, f);
 
-quad(newt, n)
-my_log(newt, n)
+opt{2}.name = 'BFGS';
+opt{2}.fun = @(x0, H, g, f) bfgs(x0, g, f);
+
+for k = 1 : length(n)
+    fprintf('\nn = %d\n===\n', n(k));
+    for l = 2 : length(opt)
+        quad(opt{l}, n(k))
+        my_log(opt{l}, n(k))
+    end
+end
 
 function [z] = cust_log(x)
 z = log(x);
@@ -35,7 +43,7 @@ fprintf('Running MY_LOG: ')
 function quad(opt, n)
 
 % Create problem.
-A = randn(n) + i * randn(n);
+A = randn(n) + 1 * randn(n);
 b = randn(n, 1);
 
 H = @(x) A' * A; % Hessian.
@@ -46,5 +54,6 @@ f = @(x) 0.5 * norm(A * x - b)^2; % Objective function.
 x0 = randn(n, 1);
 
 % Optimize.
+fprintf('Running QUAD: ')
 [x, f_hist] = opt.fun(x0, H, g, f);
 

@@ -1,5 +1,6 @@
 function [x, err_hist, f_hist] = newton(x0, H, g, f)
 
+tic;
 n = length(x0);
 x = x0;
 
@@ -15,7 +16,9 @@ for k = 1 : 1e2
 end
 
 
-fprintf('Newton Method (%d steps) -> funval %e , error %e\n', ...
-    length(err_hist), f_hist(end), err_hist(end));
-semilogy(err_hist, '.-');
+fprintf('Newton Method (%d steps, %1.1e secs) -> funval %e , error %e\n', ...
+    length(err_hist), toc, f_hist(end), err_hist(end));
+subplot 211; semilogy(f_hist, '.-');
+subplot 212; semilogy(err_hist, '.-');
+drawnow
 
